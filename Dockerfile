@@ -1,9 +1,18 @@
-FROM php:8.2-apache
+FROM php:8.3-apache
 
+# Install tools
+RUN apt-get update && apt-get install -y unzip git zip curl && docker-php-ext-install pdo pdo_mysql
+
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Copy project ke container
 COPY . /var/www/html/
 
-# Aktifin mod_rewrite kalau butuh .htaccess
-RUN a2enmod rewrite
+# Pindah ke direktori project
+WORKDIR /var/www/html/
 
-# Optional: ganti DocumentRoot kalau kamu *masih* pake folder public/
-# RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+# Jalankan composer install
+RUN composer install
+
+EXPOSE 80
