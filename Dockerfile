@@ -1,9 +1,9 @@
 FROM php:8.2-apache
 
-# Salin semua file ke /var/www/html (root Apache)
 COPY . /var/www/html/
 
-# Install ekstensi PHP yang dibutuhkan (misal mysqli atau lainnya)
-RUN docker-php-ext-install mysqli
+# Aktifin mod_rewrite kalau butuh .htaccess
+RUN a2enmod rewrite
 
-EXPOSE 80
+# Optional: ganti DocumentRoot kalau kamu *masih* pake folder public/
+# RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
