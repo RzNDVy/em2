@@ -32,7 +32,7 @@ function tambahDataKeSpreadsheet($data) {
     $range = 'Surat Keluar!A4:F'; // Mulai dari row 4 karena row 1–3 header
     $service = getGoogleSheetService();
 
-    $body = new Google_Service_Sheets_ValueRange([
+    $body = new Google\Service\Sheets\ValueRange();([
         'values' => [$data]
     ]);
 

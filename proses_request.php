@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../includes/spreadsheet.php';
+require_once(__DIR__ . '/../includes/spreadsheet.php');
 $service = getGoogleSheetService();
 // Validasi input
 $required_fields = ['tanggal_surat', 'tujuan_surat', 'perihal', 'pj', 'bidang', 'jenis_surat', 'bulan_romawi', 'tahun'];

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/spreadsheet.php';
+require_once(__DIR__ . '/../includes/spreadsheet.php');
 
 function getLastSuratNumber() {
     $service = getGoogleSheetService();
