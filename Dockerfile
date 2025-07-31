@@ -1,18 +1,9 @@
-FROM php:8.2-cli
+FROM php:8.2-apache
 
-# Install extensions & tools
-RUN apt-get update && apt-get install -y \
-    unzip \
-    git \
-    curl \
-    libzip-dev \
-    && docker-php-ext-install zip
+# Salin semua file ke /var/www/html (root Apache)
+COPY . /var/www/html/
 
-# Set working directory
-WORKDIR /var/www/html
+# Install ekstensi PHP yang dibutuhkan (misal mysqli atau lainnya)
+RUN docker-php-ext-install mysqli
 
-# Copy everything
-COPY . .
-
-# Start server
-CMD ["php", "-S", "0.0.0.0:10000", "-t", "public"]
+EXPOSE 80
